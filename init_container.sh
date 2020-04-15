@@ -13,13 +13,8 @@ PHP quickstart: https://aka.ms/php-qs
 PHP version : `php -v | head -n 1 | cut -d ' ' -f 2`
 Apache version: `dpkg -l apache2 | grep ^ii | awk '{print $3}' | cut -f1 -d-`
 EOL
+cat /etc/motd
 
 sed -i "s/{PORT}/$PORT/g" /etc/apache2/apache2.conf
 
-echo "$@" > /opt/startup/startupCommand
-/opt/startup/generateStartupCommand.sh
-chmod 755 /opt/startup/startupCommand
-
-STARTUPCOMMAND=$(cat /opt/startup/startupCommand)
-echo "Running $STARTUPCOMMAND"
-eval "exec $STARTUPCOMMAND"
+exec "/usr/sbin/apache2ctl -D FOREGROUND"
