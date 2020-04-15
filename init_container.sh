@@ -11,12 +11,10 @@ A P P   S E R V I C E   O N   L I N U X
 Documentation: http://aka.ms/webapp-linux
 PHP quickstart: https://aka.ms/php-qs
 PHP version : `php -v | head -n 1 | cut -d ' ' -f 2`
+Apache version: `dpkg -l apache2 | grep ^ii | awk '{print $3}' | cut -f1 -d-`
 EOL
-cat /etc/motd
 
 sed -i "s/{PORT}/$PORT/g" /etc/apache2/apache2.conf
-mkdir /var/lock/apache2
-mkdir /var/run/apache2
 
 echo "$@" > /opt/startup/startupCommand
 /opt/startup/generateStartupCommand.sh
